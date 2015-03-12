@@ -27,6 +27,10 @@ Exports not yet exported orders from woocommerce to a xml-file for Lexware - for
 
 == Frequently Asked Questions ==
 
+= Wenn ich die Exportdatei öffne, werden statt der Umlaute kryptische Zeichen angezeigt. =
+
+In diesem Fall ist in dem Editor, der die Datei anzeigt, der falsche Zeichensatz eingestellt. Stellen Sie auf UTF-8 um und die Umlaute werden korrekt dargestellt.
+
 == Screenshots ==
 1. The dialog of WooCommerce to Lexware
 
