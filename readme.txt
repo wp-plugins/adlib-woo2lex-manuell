@@ -34,3 +34,6 @@ Exports not yet exported orders from woocommerce to a xml-file for Lexware - for
 
 = 0.1 =
 woo2lex is published
+
+= 0.2 =
+i18n added

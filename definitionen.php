@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) or die( 'Kein Direktzugriff möglich!' );
 
-$version='0.1.0';
+$version='0.2.0';
 define('DATEIPFAD','../export/');
 define('HEADER1','<?xml version="1.0" encoding="ISO-8859-1"?>'."\n".
 	"<ORDER_LIST>\n"

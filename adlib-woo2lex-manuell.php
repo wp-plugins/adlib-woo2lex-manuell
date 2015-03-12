@@ -3,7 +3,9 @@
  * Plugin Name: WooCommerce-Bestellexport für Lexware
  * Plugin URI: www.ad-libitum.info/plugins/adlib-bestellexport-manuell/
  * Description: Exportiert Bestellungen manuell auf Knopfdruck
- * Version: 0.1.0
+ * Text Domain: adlib-woo2lex-manuell
+ * Domain Path: /lang
+ * Version: 0.2.0
  * Author: Oliver Wagner
  * Author URI: http://www.ad-libitum.info
  * License: GPLv2 or later
@@ -31,6 +33,7 @@ defined( 'ABSPATH' ) or die( 'Kein Direktzugriff möglich!' );
 
 register_activation_hook(__FILE__,'adl_erweitereDatenbank');
 add_action( 'admin_menu','adlib_erstelleMenu');
+add_action('init', 'load_plugin_language');	/*plugins_loaded*/
 
 /**
  * Erweitere Datenbank
@@ -44,7 +47,7 @@ add_action( 'admin_menu','adlib_erstelleMenu');
  */
 function adl_erweitereDatenbank() {
 	/* gibt es woocommerce überhaupt? Wenn nicht, dann gleich Schluß machen */
-	if (!class_exists('WooCommerce')) die("WooCommerce ist NICHT aktiv. Das Plugin für den Datenexport kann nicht aktiviert werden!");
+	if (!class_exists('WooCommerce')) die("WooCommerce is not loaded. The plugin for the export of data can not be activated!");
 	require_once('definitionen.php');
 	global $wpdb;
 
@@ -70,7 +73,7 @@ function adl_erweitereDatenbank() {
  * @change
  */
 function adlib_erstelleMenu() {
-	 add_menu_page('Datenexport','Datenexport','export','adlib_export_manuell','fuellePluginmenu',plugin_dir_url( __FILE__ ).'export.png','81.10001');
+	 add_menu_page(__('Datenexport', 'adlib-woo2lex-manuell'),__('Datenexport', 'adlib-woo2lex-manuell'),'export','adlib_export_manuell','fuellePluginmenu',plugin_dir_url( __FILE__ ).'export.png','81.10001');
  }
  
 /**
@@ -82,34 +85,34 @@ function adlib_erstelleMenu() {
 function fuellePluginmenu() {
 	?>
 	<div class="wrap">
-		<h2>Manueller Datenexport</h2>
-		<p>Datenexport für <b>Lexware</b> Warenwirtschaftsprogramme gemäß den Spezifikationen von <a href="https://support.lexware.de/support/produkte/warenwirtschaft-pro/fragen-und-antworten/000000000047110?" target="_blank">Lexware</a>.</p>
-		<p>Der Datenexport startet nach einem Klick auf den Button "Daten exportieren".</p>
-		<p>Exportierte Datensätze werden gekennzeichnet und können <b>nicht</b> erneut exportiert werden.</p>
-		<p>Der Dateiname setzt sich aus dem Datum sowie der Uhrzeit zusammen. Die Dateiendung ist xml.</p>
+		<h2><?php esc_html_e('Manueller Datenexport', 'adlib-woo2lex-manuell') ?></h2>
+		<p><?php _e('Pluginmenu_Absatz1', 'adlib-woo2lex-manuell') ?><a href="https://support.lexware.de/support/produkte/warenwirtschaft-pro/fragen-und-antworten/000000000047110?\" target="_blank\">Lexware</a>.</p>
+		<p><?php _e('Pluginmenu_Absatz2', 'adlib-woo2lex-manuell') ?></p>
+		<p><?php _e('Pluginmenu_Absatz3', 'adlib-woo2lex-manuell') ?></p>
+		<p><?php _e('Pluginmenu_Absatz4', 'adlib-woo2lex-manuell') ?></p>
 		<?php
 			if ( isset( $_POST[ 'export' ] ) ) {
 				$ergebnis=exportiereDaten();
 				if ($ergebnis) {
 		?>
 			<div id="message" class="updated fade">
-				<p>Es wurden <?php echo $ergebnis; ?> Bestellung(en) exportiert.</p>
+				<p><?php echo $ergebnis." "; printf(_n('Bestellung','Bestellungen',$ergebnis,'adlib-woo2lex-manuell')); echo " "; esc_html_e('Export', 'adlib-woo2lex-manuell') ?></p>
 			</div>
 		<?php
 				} else {
 		?>
 			<div id="message" class="error fade">
-				<p>Es liegen keine neuen Bestellungen vor.</p>
+				<p><?php esc_html_e('keine neuen Bestellungen', 'adlib-woo2lex-manuell') ?></p>
 			</div>
 		<?php
 				}
 		}
 		?>
 		<form method="post" action="">
-			<input name="export" type="submit" id="export" value=" Daten exportieren " />
-			<span class="description">Exportiert die Bestellungen in das folgende Verzeichnis (der Dateiname ist ein Beispiel): woocommerce/export/20150101-115500.xml</span>
+			<input name="export" type="submit" id="export" value="<?php esc_html_e('Exportbutton', 'adlib-woo2lex-manuell') ?>" />
+			<span class="description"><?php esc_html_e('Beispielexportdatei', 'adlib-woo2lex-manuell') ?></span>
 		</form>
-		<p style="width:50%;background-color:#c9c9c9;padding:10px;">Wenn Sie mit diesem Plugin zufrieden sind bitte ich Sie darum, mir einen selbst gewählten Betrag per <img alt="PayPal" src="<?php echo plugin_dir_url( __FILE__ ); ?>paypal.png"></img> zu <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=owagner@verizon-press.de&item_name=WooCommerce2Lexware&currency_code=EUR" target="_blank">überweisen</a>. Herzlichen Dank dafür. Wenn Sie eine Rechnung benötigen, schreiben Sie mir bitte eine <a href="mailto:owagner@ad-libitum.info&subject=Woo2Lex">eMail</a> mit Ihrer Anschrift und Sie bekommen eine Rechnung über den gewünschten Betrag &ndash; zuzüglich der gesetzlichen Mehrwertsteuer.</p>
+		<p style="width:50%;background-color:#c9c9c9;padding:10px;"><?php esc_html_e('Bettel1', 'adlib-woo2lex-manuell') ?> <img alt="PayPal" src="<?php echo plugin_dir_url( __FILE__ ); ?>paypal.png"></img> <?php esc_html_e('Bettel2', 'adlib-woo2lex-manuell') ?> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=owagner@verizon-press.de&item_name=WooCommerce2Lexware&currency_code=EUR" target="_blank"><?php esc_html_e('Bettel3', 'adlib-woo2lex-manuell') ?></a>. <?php esc_html_e('Bettel4', 'adlib-woo2lex-manuell') ?> <a href="mailto:owagner@ad-libitum.info&subject=Woo2Lex">eMail</a> <?php esc_html_e('Bettel5', 'adlib-woo2lex-manuell') ?></p>
 	</div>
 	<?php
  }
@@ -136,23 +139,30 @@ function exportiereDaten() {
 	/* alle noch nicht exportierten Bestellungen raussuchen */
 	$abfrage="SELECT ID, post_date, post_excerpt FROM `".$wpdb->prefix."posts` WHERE post_type='shop_order' AND adl_exportiert=0 ORDER BY ID";
 	$ergebnis=$wpdb->get_results($abfrage);
+/*	debug_view("Anzahl",$wpdb->num_rows);*/
 	$anzahlBestellungen=$wpdb->num_rows;
 	if ($anzahlBestellungen==0) {
 		return false;
 	}
+/*	debug_view("abfrage",$abfrage);*/
+/*	debug_view("ergebnis",$ergebnis);*/
 	/* Dateiname erzeugen, Datei anlegen und öffnen */
 	$dateiname=DATEIPFAD.date('Ymd-His').".xml";
 	$datei=fopen($dateiname,"wb");
 	fwrite($datei,HEADER1);
 	/*jede Bestellung anschauen */
 	foreach($ergebnis as $wert) {
+/*		debug_view("wert",$wert);*/
 		$bestellID=$wert->ID;
+/*		debug_view("bestellID",$bestellID);*/
 		$adlib_bestelldaten['bestellnummer']=$bestellID;
 		$adlib_bestelldaten['bestelldatum']=strftime('%Y-%m-%dT%H:%M:%S+01:00',strtotime($wert->post_date));
 		$adlib_bestelldaten['remark_order']=ersetzeSonderzeichen($wert->post_excerpt);
 		$abfrage="SELECT meta_key, meta_value FROM ".$wpdb->prefix."postmeta WHERE post_id=".$bestellID;
 		$ergebnisPostMeta=$wpdb->get_results($abfrage);		/* jetzt haben wir die Kundendaten */
+/*		debug_view("ergebnisPostMeta",$ergebnisPostMeta);*/
 		foreach($ergebnisPostMeta as $wertPost) {
+/*			debug_view("wertPost",$wertPost);*/
 			switch ($wertPost->meta_key) {
 				case "_order_currency":
 					$adlib_bestelldaten['waehrung']=ersetzeSonderzeichen($wertPost->meta_value);
@@ -217,15 +227,24 @@ function exportiereDaten() {
 		$abfrage="SELECT order_item_name,order_item_type,order_item_id FROM ".$wpdb->prefix."woocommerce_order_items WHERE order_id=".$bestellID;
 		$ergebnisArtikelliste=$wpdb->get_results($abfrage);		/* jetzt haben wir die Artikelliste */
 		$schleifenzaehler=$wpdb->num_rows;
+/*		debug_view("#Datensätze",$wpdb->num_rows);*/
+/*		debug_view("Inhalt",$ergebnisArtikelliste);*/
 		$artikelzaehler=-1;
+/*		debug_view("ergebnisArtikelliste",$ergebnisArtikelliste);*/
 		foreach($ergebnisArtikelliste as $wertArtikelliste) {
 			if ($wertArtikelliste->order_item_type=='line_item') {
+/*			debug_view("Trenner---------------",$dummy);*/
+/*			debug_view("Artikeltyp",$ergebnisArtikelliste[$i]->order_item_type);*/
 				$artikelzaehler+=1;
+/*				debug_view("artikelzaehler",$artikelzaehler);*/
+/*				debug_view("Schleife",$i);*/
+/*				debug_view("ergebnisArtikelliste",$ergebnisArtikelliste[$i]->order_item_type);*/
 				$artikelnummer=$wertArtikelliste->order_item_id;
 				$adlib_bestelldaten['artikel'][$artikelzaehler]['artikel_bezeichnung_kurz']=ersetzeSonderzeichen($wertArtikelliste->order_item_name);
 				$abfrage="SELECT * FROM ".$wpdb->prefix."woocommerce_order_itemmeta WHERE order_item_id=".$artikelnummer;
 				$ergebnisArtikel=$wpdb->get_results($abfrage);		/* jetzt haben wir die Artikeldaten */
 				foreach ($ergebnisArtikel as $wertArtikeldaten) {
+/*					debug_view("wertArtikeldaten",$wertArtikeldaten);*/
 					switch ($wertArtikeldaten->meta_key) {
 						case "_qty":
 							$adlib_bestelldaten['artikel'][$artikelzaehler]['artikel_anzahl']=$wertArtikeldaten->meta_value;
@@ -262,6 +281,11 @@ function exportiereDaten() {
 				}
 			}
 		}
+/*		debug_view("adlib_bestelldaten",$adlib_bestelldaten);*/
+/*		debug_view("ergebnisArtikelliste",$ergebnisArtikelliste);
+		debug_view("artikelnummer",$artikelnummer);
+		debug_view("ergebnisArtikel",$ergebnisArtikel);*/
+		
 		/* alle Daten ermittelt, jetzt in Datei schreiben */
 		fwrite($datei,HEADER2);
 		fwrite($datei,"\t\t\t<ORDER_INFO>\n");
@@ -341,6 +365,7 @@ function exportiereDaten() {
 		fwrite($datei,"\t</ORDER>\n");
 		/* exportierten Datensatz als exportiert kennzeichnen */
 		$befehl="UPDATE ".$wpdb->prefix."posts SET adl_exportiert=1 WHERE ID=".$bestellID;
+/*		debug_view("Befehl",$befehl);*/
 		$wpdb->query($befehl);
 		}
 	/* offene Tags schließen und Daten ebenfalls schließen */
@@ -361,9 +386,21 @@ function ersetzeSonderzeichen ($zeichenkette) {
 	$zeichenkette=htmlspecialchars ($zeichenkette, ENT_QUOTES, 'UTF-8');
 	$zeichenkette=str_replace('#039','apos',$zeichenkette); 		/* sonst funktionieren die einfachen Anführungszeichen nicht */
 	$zeichenkette=str_replace('amp;','',$zeichenkette); 			/* sonst funktionieren die >< nicht */
+/*	debug_view("zeichenkette",$zeichenkette);*/
 	return $zeichenkette;
  }
  
+/**
+* Spracheinbindung
+ *
+ * @since   0.2
+ * @change  0.2
+ */
+
+function load_plugin_language() {
+	load_plugin_textdomain('adlib-woo2lex-manuell',	false, basename(dirname(__FILE__)).'/lang');
+}
+
 function debug_view ($name,$what) {
     echo "\n<pre>$name: ";
     if ( is_array( $what ) )  {

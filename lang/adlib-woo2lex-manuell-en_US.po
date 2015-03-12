@@ -1,0 +1,99 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce-Bestellexport für Lexware\n"
+"POT-Creation-Date: 2015-03-11 17:42+0100\n"
+"PO-Revision-Date: 2015-03-11 17:42+0100\n"
+"Last-Translator: Oliver Wagner <owagner@ad-libitum.info>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: adlib-woo2lex-manuell.php:76
+msgid "Datenexport"
+msgstr "Dataexport"
+
+#: adlib-woo2lex-manuell.php:88
+msgid "Manueller Datenexport"
+msgstr "Manual Export"
+
+#: adlib-woo2lex-manuell.php:89
+msgid "Pluginmenu_Absatz1"
+msgstr ""
+"Export for the ERP-software of <b>Lexware</b> corresponding to the "
+"specifications of "
+
+#: adlib-woo2lex-manuell.php:90
+msgid "Pluginmenu_Absatz2"
+msgstr "The export starts with a click on the button \"Export Data\"."
+
+#: adlib-woo2lex-manuell.php:91
+#, fuzzy
+msgid "Pluginmenu_Absatz3"
+msgstr ""
+"Exported data records will be tagged an can <b>not</b> be exported a second "
+"time."
+
+#: adlib-woo2lex-manuell.php:92
+msgid "Pluginmenu_Absatz4"
+msgstr ""
+"The filename is composed of the actual date plus the actual time. The file "
+"extension is xml."
+
+#: adlib-woo2lex-manuell.php:99
+msgid "Bestellung"
+msgid_plural "Bestellungen"
+msgstr[0] "order"
+msgstr[1] "orders"
+
+#: adlib-woo2lex-manuell.php:99
+msgid "Export"
+msgstr "have been exported."
+
+#: adlib-woo2lex-manuell.php:105
+msgid "keine neuen Bestellungen"
+msgstr "There are no new orders."
+
+#: adlib-woo2lex-manuell.php:112
+msgid "Exportbutton"
+msgstr " Export Data "
+
+#: adlib-woo2lex-manuell.php:113
+msgid "Beispielexportdatei"
+msgstr ""
+"Exports the orders in the following directory (the filename is an example): "
+"woocommerce/export/20150101-115500.xml"
+
+#: adlib-woo2lex-manuell.php:115
+msgid "Bettel1"
+msgstr ""
+"If you find this plugin useful please be so kind and transfer an amout of "
+"your own choice via"
+
+#: adlib-woo2lex-manuell.php:115
+msgid "Bettel2"
+msgstr " "
+
+#: adlib-woo2lex-manuell.php:115
+msgid "Bettel3"
+msgstr "to my account at PayPal"
+
+#: adlib-woo2lex-manuell.php:115
+msgid "Bettel4"
+msgstr "Thank you very much for that. If you need an invoice, send me an"
+
+#: adlib-woo2lex-manuell.php:115
+msgid "Bettel5"
+msgstr ""
+"with your address and you will get an invoice stating the choosen amount "
+"plus the legal VAT."
