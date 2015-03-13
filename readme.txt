@@ -32,6 +32,7 @@ Exports not yet exported orders from woocommerce to a xml-file for Lexware - for
 In diesem Fall ist in dem Editor, der die Datei anzeigt, der falsche Zeichensatz eingestellt. Stellen Sie auf UTF-8 um und die Umlaute werden korrekt dargestellt.
 
 == Screenshots ==
+
 1. The dialog of WooCommerce to Lexware
 
 == Changelog ==
