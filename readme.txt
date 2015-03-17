@@ -42,3 +42,6 @@ woo2lex is published
 
 = 0.2 =
 i18n added
+
+= 0.2.1 =
+new encoding: UTF-8
