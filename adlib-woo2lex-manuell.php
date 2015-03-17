@@ -5,7 +5,7 @@
  * Description: Exportiert Bestellungen manuell auf Knopfdruck
  * Text Domain: adlib-woo2lex-manuell
  * Domain Path: /lang
- * Version: 0.2.0
+ * Version: 0.2.1
  * Author: Oliver Wagner
  * Author URI: http://www.ad-libitum.info
  * License: GPLv2 or later
