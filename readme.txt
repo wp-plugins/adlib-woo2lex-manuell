@@ -1,7 +1,7 @@
 === Manueller Datenexport von WooCommerce nach Lexware ===
 Contributors: Odido
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=owagner@verizon-press.de&item_name=WooCommerce2Lexware&currency_code=EUR
-Tags: export, order, woocommerce, lexware, opentrans
+Tags: export, order, woocommerce, lexware, opentrans, xml
 Requires at least: WooCommerce
 Tested up to: 4.1
 Stable tag: trunk
